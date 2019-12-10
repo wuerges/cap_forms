@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Answer type:</strong>
+  <%= @answer.answer_type %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @answer.text %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @answer.priority %>
+</p>
+
+<p>
+  <strong>Locked:</strong>
+  <%= @answer.locked %>
+</p>
+
+<%= link_to 'Edit', edit_answer_path(@answer) %> |
+<%= link_to 'Back', answers_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @question_template.name %>
+</p>
+
+<p>
+  <strong>Locked:</strong>
+  <%= @question_template.locked %>
+</p>
+
+<%= link_to 'Edit', edit_question_template_path(@question_template) %> |
+<%= link_to 'Back', question_templates_path %>

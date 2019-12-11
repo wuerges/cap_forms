@@ -7,27 +7,27 @@
 
 <p>
   <strong>Form application:</strong>
-  <%= @form_submission.form_application_id %>
+  <%= @form_submission.form_application.to_s %>
 </p>
 
 <p>
   <strong>Professor:</strong>
-  <%= @form_submission.professor_id %>
+  <%= @form_submission.professor.name %>
 </p>
 
 <p>
   <strong>Offer:</strong>
-  <%= @form_submission.offer_id %>
+  <%= @form_submission.offer.to_s %>
 </p>
 
 <p>
   <strong>Question:</strong>
-  <%= @form_submission.question_id %>
+  <%= @form_submission.question.text %>
 </p>
 
 <p>
   <strong>Answer:</strong>
-  <%= @form_submission.answer_id %>
+  <%= @form_submission.answer.text %>
 </p>
 
 <%= link_to 'Edit', edit_form_submission_path(@form_submission) %> |

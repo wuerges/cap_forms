@@ -8,7 +8,7 @@
         <%= question.to_s %>
         <ul>
         <% for answer in question.question_template.answers %>
-            <% q_id = "#{question.id} #{answer.id}" %>
+            <% q_id = "answers[#{question.id}[#{answer.id}]]" %>
             <li>
             <% if answer.checkbox? %>
                 <%= check_box_tag q_id, answer.text %> 

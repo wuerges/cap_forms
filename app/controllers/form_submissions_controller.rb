@@ -24,16 +24,23 @@ class FormSubmissionsController < ApplicationController
   end
 
   def submit_form_post
-    @form_application = FormApplication.find(params[:id])
-    @professor = Professor.find(params[:professor_id])
-    @offer = Offer.find(params[:offer_id])
 
-    logger.debug request.raw_post
+    @form_application = FormApplication.find(params.require(:id))
+    @professor = Professor.find(params.require(:professor_id))
+    @offer = Offer.find(params.require(:offer_id))
 
-    @form_submission = FormSubmission.new
-    @form_submission.form_application = @form_application
-    @form_submission.professor = @professor
-    @form_submission.offer = @offer
+    for question_id, ans in params.permit(answers: {})[:answers]
+      for answer_id, txt in ans
+        @fs = FormSubmission.new
+        @fs.form_application = @form_application
+        @fs.professor = @professor
+        @fs.offer = @offer
+        @fs.answer = Answer.find(answer_id)
+        @fs.question = Question.find(question_id)
+        @fs.text = txt
+        @fs.save!
+      end
+    end
 
   end
 

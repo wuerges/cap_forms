@@ -13,12 +13,13 @@
 
   <div class="field">
     <%= form.label :semester_id %>
-    <%= form.text_field :semester_id %>
+    <%= form.collection_select :semester_id, Semester.all, :id, :to_s, 
+      { selected: form_application.semester && form_application.semester.id } %>
   </div>
-
   <div class="field">
     <%= form.label :form_template_id %>
-    <%= form.text_field :form_template_id %>
+    <%= form.collection_select :form_template_id, FormTemplate.all, :id, :name, 
+      { selected: form_application.form_template && form_application.form_template.id } %>
   </div>
 
   <div class="actions">

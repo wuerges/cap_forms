@@ -2,12 +2,12 @@
 
 <p>
   <strong>Semester:</strong>
-  <%= @form_application.semester_id %>
+  <%= @form_application.semester.to_s %>
 </p>
 
 <p>
   <strong>Form template:</strong>
-  <%= @form_application.form_template_id %>
+  <%= @form_application.form_template.name %>
 </p>
 
 <%= link_to 'Edit', edit_form_application_path(@form_application) %> |

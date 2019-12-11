@@ -14,8 +14,8 @@
   <tbody>
     <% @form_applications.each do |form_application| %>
       <tr>
-        <td><%= form_application.semester_id %></td>
-        <td><%= form_application.form_template_id %></td>
+        <td><%= form_application.semester.to_s %></td>
+        <td><%= form_application.form_template.name %></td>
         <td><%= link_to 'Show', form_application %></td>
         <td><%= link_to 'Edit', edit_form_application_path(form_application) %></td>
         <td><%= link_to 'Destroy', form_application, method: :delete, data: { confirm: 'Are you sure?' } %></td>

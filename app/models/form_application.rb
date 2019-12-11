@@ -13,9 +13,9 @@ class FormApplication < ApplicationRecord
     # output a hash { question_id => results }
     # where results = ([labels], [count])
 
+    # .where("question_type = ?", question_type)
     resp = Answer.joins("join form_submissions on answers.id = answer_id join questions on question_id = questions.id")
                   .where("form_application_id = ?", id)
-                  .where("question_type = ?", question_type)
                   .where("answer_type != 2")
                   .where("professor_id = ?", professor_id)
                   .where("offer_id = ?", offer_id)
@@ -25,27 +25,43 @@ class FormApplication < ApplicationRecord
     return fix_data(resp)    
   end
 
-  def gather_complete_data
+  def gather_complete_data(question_type)
     # should gather data for the complete form
     # output a hash { question_id => results }
+    # .where("question_type = ?", question_type)
     resp = Answer.joins("join form_submissions on answers.id = answer_id join questions on question_id = questions.id")
                   .where("form_application_id = ?", id)
-                  .where("question_type = ?", question_type)
-                  .where("answer_type != 2")
                   .group(["question_id", "answer_id"])
                   .count("answer_id")
-    return fix_data(resp)
+                  return fix_data(resp)
+                  # .where("answer_type != 2")
   end
 
   def fix_data(resp)
+    q_hash = {}
+    
     for k,count in resp
       question_id, answer_id = k
-      if ! result[question_id]
-        result[question_id] = [[],[]]
+      
+      if ! q_hash[question_id]
+        q_hash[question_id] = []
       end
-      result[question_id][0] << answer_id
-      result[question_id][1] << count
+
+      q_hash[question_id] << [answer_id, count]
     end
+
+    result = {}
+    for question_id, v in q_hash
+      answers = Question.find(question_id).question_template.answers
+      ids = answers.map(&:id)
+      h_count = Hash[v]
+      
+      labels = answers.map(&:text)
+      counts = ids.map  { |i| h_count[i] ? h_count[i] : 0 } 
+      
+      result[question_id] = [labels, counts.map {|v| v.to_f / counts.sum}, counts]
+    end  
+
     return result
   end
 

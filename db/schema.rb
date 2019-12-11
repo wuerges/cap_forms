@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_103340) do
+ActiveRecord::Schema.define(version: 2019_12_11_103643) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -39,6 +39,30 @@ ActiveRecord::Schema.define(version: 2019_12_11_103340) do
   create_table "ccrs_majors", id: false, force: :cascade do |t|
     t.integer "major_id", null: false
     t.integer "ccr_id", null: false
+  end
+
+  create_table "form_applications", force: :cascade do |t|
+    t.integer "semester_id", null: false
+    t.integer "form_template_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["form_template_id"], name: "index_form_applications_on_form_template_id"
+    t.index ["semester_id"], name: "index_form_applications_on_semester_id"
+  end
+
+  create_table "form_submissions", force: :cascade do |t|
+    t.integer "question_id", null: false
+    t.integer "form_application_id", null: false
+    t.integer "professor_id", null: false
+    t.integer "offer_id", null: false
+    t.integer "answer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_form_submissions_on_answer_id"
+    t.index ["form_application_id"], name: "index_form_submissions_on_form_application_id"
+    t.index ["offer_id"], name: "index_form_submissions_on_offer_id"
+    t.index ["professor_id"], name: "index_form_submissions_on_professor_id"
+    t.index ["question_id"], name: "index_form_submissions_on_question_id"
   end
 
   create_table "form_templates", force: :cascade do |t|
@@ -129,6 +153,13 @@ ActiveRecord::Schema.define(version: 2019_12_11_103340) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "form_applications", "form_templates"
+  add_foreign_key "form_applications", "semesters"
+  add_foreign_key "form_submissions", "answers"
+  add_foreign_key "form_submissions", "form_applications"
+  add_foreign_key "form_submissions", "offers"
+  add_foreign_key "form_submissions", "professors"
+  add_foreign_key "form_submissions", "questions"
   add_foreign_key "offers", "ccrs"
   add_foreign_key "offers", "majors"
   add_foreign_key "questions", "question_templates"

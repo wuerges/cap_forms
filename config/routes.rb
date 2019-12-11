@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :form_submissions
   resources :form_applications
   resources :semesters
   resources :offers

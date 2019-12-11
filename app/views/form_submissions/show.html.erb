@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @form_submission.question_id %>
+</p>
+
+<p>
+  <strong>Form application:</strong>
+  <%= @form_submission.form_application_id %>
+</p>
+
+<p>
+  <strong>Professor:</strong>
+  <%= @form_submission.professor_id %>
+</p>
+
+<p>
+  <strong>Offer:</strong>
+  <%= @form_submission.offer_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @form_submission.question_id %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @form_submission.answer_id %>
+</p>
+
+<%= link_to 'Edit', edit_form_submission_path(@form_submission) %> |
+<%= link_to 'Back', form_submissions_path %>

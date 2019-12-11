@@ -5,11 +5,8 @@
   <%= @professor.name %>
 </p>
 
-<p>  <strong>Majors:</strong></p>
+<p>  <strong>Majors:</strong> <%= @professor.majors.map(&:to_s) %> </p>
 
-  <% for major in @professor.majors %>
-    <p> <%= major %> </p>
-  <% end %>
 
 <%= link_to 'Edit', edit_professor_path(@professor) %> |
 <%= link_to 'Back', professors_path %>

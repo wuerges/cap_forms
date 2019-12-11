@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_103140) do
+ActiveRecord::Schema.define(version: 2019_12_11_103340) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -84,6 +84,11 @@ ActiveRecord::Schema.define(version: 2019_12_11_103140) do
     t.integer "offer_id", null: false
   end
 
+  create_table "offers_semesters", id: false, force: :cascade do |t|
+    t.integer "semester_id", null: false
+    t.integer "offer_id", null: false
+  end
+
   create_table "professors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -107,6 +112,14 @@ ActiveRecord::Schema.define(version: 2019_12_11_103140) do
     t.index ["question_template_id"], name: "index_questions_on_question_template_id"
   end
 
+  create_table "semesters", force: :cascade do |t|
+    t.string "name"
+    t.integer "major_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["major_id"], name: "index_semesters_on_major_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -119,4 +132,5 @@ ActiveRecord::Schema.define(version: 2019_12_11_103140) do
   add_foreign_key "offers", "ccrs"
   add_foreign_key "offers", "majors"
   add_foreign_key "questions", "question_templates"
+  add_foreign_key "semesters", "majors"
 end

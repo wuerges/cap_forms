@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @form_application.form_template.name %></h1>
+<h2><%= @form_application.semester.to_s %></h2>
+
+<%= form_tag submit_form_post_path(id: @form_application.id, professor_id: @professor.id, offer_id: @offer.id) do |f| -%>
+    <% for question in @form_application.form_template.questions %>
+        <%= question.to_s %>
+        <ul>
+        <% for answer in question.question_template.answers %>
+            <li>
+            <% if answer.checkbox? %>
+                <%= check_box_tag question.id, answer.id %> 
+                <%= answer.text %>
+            <% elsif answer.radio? %>
+                <%= radio_button_tag question.id, answer.id %> 
+                <%= answer.text %>
+            <% elsif answer.textarea? %>
+                <%= answer.text %> <br />
+                <%= text_area_tag question.id %> 
+            <% else %>
+                <%= answer.answer_type %>
+            <% end %>
+            </li>
+        <% end %>
+        </ul>
+
+    <% end %>
+    <%= submit_tag "Submit answer" %>
+<% end -%>
+
+<br>
+

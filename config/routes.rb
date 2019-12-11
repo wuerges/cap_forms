@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :answers
   
   get '/submit_form/:id/:professor_id/:offer_id', to: 'form_submissions#submit_form', as: 'submit_form'
+  post '/submit_form_post/:id/:professor_id/:offer_id', to: 'form_submissions#submit_form_post', as: 'submit_form_post'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

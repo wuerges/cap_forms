@@ -3,6 +3,10 @@
 <p>
   <strong>Name:</strong>
   <%= @form_template.name %>
+
+  <% for question in @form_template.sorted_questions %>
+    <p> <%= question %></p>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_form_template_path(@form_template) %> |

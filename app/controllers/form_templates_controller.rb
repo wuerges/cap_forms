@@ -69,6 +69,9 @@ class FormTemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_template_params
-      params.require(:form_template).permit(:name)
+      res = params.require(:form_template).permit(:name, questions: [])
+      res[:questions] = Question.find(res[:questions].reject { |v| v==""})
+      res
     end
+
 end

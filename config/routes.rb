@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+  root "welcome#index"
   resources :reports
   resources :form_submissions
   resources :form_applications

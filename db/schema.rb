@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_142155) do
+ActiveRecord::Schema.define(version: 2019_12_11_150741) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -48,6 +48,11 @@ ActiveRecord::Schema.define(version: 2019_12_11_142155) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["form_template_id"], name: "index_form_applications_on_form_template_id"
     t.index ["semester_id"], name: "index_form_applications_on_semester_id"
+  end
+
+  create_table "form_applications_reports", id: false, force: :cascade do |t|
+    t.integer "report_id", null: false
+    t.integer "form_application_id", null: false
   end
 
   create_table "form_submissions", force: :cascade do |t|
@@ -135,6 +140,11 @@ ActiveRecord::Schema.define(version: 2019_12_11_142155) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_template_id"], name: "index_questions_on_question_template_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "semesters", force: :cascade do |t|

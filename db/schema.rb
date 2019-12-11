@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_204837) do
+ActiveRecord::Schema.define(version: 2019_12_11_031127) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -37,4 +37,15 @@ ActiveRecord::Schema.define(version: 2019_12_10_204837) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "text"
+    t.integer "priority"
+    t.integer "question_template_id", null: false
+    t.integer "question_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_template_id"], name: "index_questions_on_question_template_id"
+  end
+
+  add_foreign_key "questions", "question_templates"
 end

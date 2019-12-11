@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @question.text %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @question.priority %>
+</p>
+
+<p>
+  <strong>Question template:</strong>
+  <%= @question.question_template.name %>
+</p>
+
+<p>
+  <strong>Question type:</strong>
+  <%= @question.question_type %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

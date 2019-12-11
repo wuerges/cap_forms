@@ -69,6 +69,8 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.fetch(:report, {})
+      ps = params.require(:report).permit(:name, form_applications:[])
+      ps[:form_applications] = FormApplication.find(ps[:form_applications].reject(&:empty?))
+      ps
     end
 end

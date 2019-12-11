@@ -11,6 +11,18 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :form_applications %>
+    <% #= form.select :answers, Answer.all.collect { |a| [a.text, a.id] }, { include_blank: false, propmt: false }, { multiple: true } %>
+    <%= form.collection_select :form_applications, FormApplication.all, :id, :to_s, 
+      { selected: report.form_applications && report.form_applications.map(&:id) }, { multiple: true } %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -8,16 +8,17 @@
         <%= question.to_s %>
         <ul>
         <% for answer in question.question_template.answers %>
+            <% q_id = "#{question.id} #{answer.id}" %>
             <li>
             <% if answer.checkbox? %>
-                <%= check_box_tag question.id, answer.id %> 
+                <%= check_box_tag q_id, answer.text %> 
                 <%= answer.text %>
             <% elsif answer.radio? %>
-                <%= radio_button_tag question.id, answer.id %> 
+                <%= radio_button_tag q_id, answer.text %> 
                 <%= answer.text %>
             <% elsif answer.textarea? %>
                 <%= answer.text %> <br />
-                <%= text_area_tag question.id %> 
+                <%= text_area_tag q_id %> 
             <% else %>
                 <%= answer.answer_type %>
             <% end %>

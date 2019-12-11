@@ -27,6 +27,14 @@ class FormSubmissionsController < ApplicationController
     @form_application = FormApplication.find(params[:id])
     @professor = Professor.find(params[:professor_id])
     @offer = Offer.find(params[:offer_id])
+
+    logger.debug request.raw_post
+
+    @form_submission = FormSubmission.new
+    @form_submission.form_application = @form_application
+    @form_submission.professor = @professor
+    @form_submission.offer = @offer
+
   end
 
   # GET /form_submissions/1/edit

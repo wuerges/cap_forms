@@ -1,0 +1,22 @@
+<%= form_with(model: ccr, local: true) do |form| %>
+  <% if ccr.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ccr.errors.count, "error") %> prohibited this ccr from being saved:</h2>
+
+      <ul>
+        <% ccr.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

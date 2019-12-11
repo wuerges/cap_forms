@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ccrs
   resources :professors
   resources :majors
   resources :users

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :professors
+  resources :majors
+  resources :users
   resources :form_templates
   resources :questions
   resources :question_templates

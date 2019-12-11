@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_094435) do
+ActiveRecord::Schema.define(version: 2019_12_11_100532) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -42,6 +42,18 @@ ActiveRecord::Schema.define(version: 2019_12_11_094435) do
     t.index ["question_id", "form_template_id"], name: "form_template_question_index"
   end
 
+  create_table "majors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "professors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "question_templates", force: :cascade do |t|
     t.string "name"
     t.boolean "locked"
@@ -57,6 +69,15 @@ ActiveRecord::Schema.define(version: 2019_12_11_094435) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_template_id"], name: "index_questions_on_question_template_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "questions", "question_templates"

@@ -8,17 +8,16 @@
         <%= question.to_s %>
         <ul>
         <% for answer in question.question_template.answers %>
-            <% q_id = "answers[#{question.id}[#{answer.id}]]" %>
             <li>
             <% if answer.checkbox? %>
-                <%= check_box_tag q_id, answer.text %> 
+                <%= check_box_tag "multiple[#{question.id}[#{answer.id}]]", answer.id %> 
                 <%= answer.text %>
             <% elsif answer.radio? %>
-                <%= radio_button_tag q_id, answer.text %> 
+                <%= radio_button_tag "single[#{question.id}]", answer.id %> 
                 <%= answer.text %>
             <% elsif answer.textarea? %>
                 <%= answer.text %> <br />
-                <%= text_area_tag q_id %> 
+                <%= text_area_tag "multiple[#{question.id}[#{answer.id}]]" %> 
             <% else %>
                 <%= answer.answer_type %>
             <% end %>

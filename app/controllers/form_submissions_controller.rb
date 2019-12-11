@@ -29,7 +29,7 @@ class FormSubmissionsController < ApplicationController
     @professor = Professor.find(params.require(:professor_id))
     @offer = Offer.find(params.require(:offer_id))
 
-    for question_id, ans in params.permit(answers: {})[:answers]
+    for question_id, ans in params.permit(multiple: {})[:multiple]
       for answer_id, txt in ans
         @fs = FormSubmission.new
         @fs.form_application = @form_application
@@ -40,6 +40,17 @@ class FormSubmissionsController < ApplicationController
         @fs.text = txt
         @fs.save!
       end
+    end
+
+    for question_id, answer_id in params.permit(single: {})[:single]
+      @fs = FormSubmission.new
+      @fs.form_application = @form_application
+      @fs.professor = @professor
+      @fs.offer = @offer
+      @fs.answer = Answer.find(answer_id)
+      @fs.question = Question.find(question_id)
+      @fs.text = "radio"
+      @fs.save!
     end
 
   end

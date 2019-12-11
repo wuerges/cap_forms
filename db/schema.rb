@@ -21,20 +21,20 @@ ActiveRecord::Schema.define(version: 2019_12_10_204837) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "question_templates", force: :cascade do |t|
-    t.string "name"
-    t.integer "locked"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "question_templates_anwers", id: false, force: :cascade do |t|
+  create_table "answers_question_templates", id: false, force: :cascade do |t|
     t.integer "question_template_id"
     t.integer "answer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["answer_id"], name: "index_question_templates_anwers_on_answer_id"
-    t.index ["question_template_id"], name: "index_question_templates_anwers_on_question_template_id"
+    t.index ["answer_id"], name: "index_answers_question_templates_on_answer_id"
+    t.index ["question_template_id"], name: "index_answers_question_templates_on_question_template_id"
+  end
+
+  create_table "question_templates", force: :cascade do |t|
+    t.string "name"
+    t.boolean "locked"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

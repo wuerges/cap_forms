@@ -14,6 +14,8 @@
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
+    <%= form.label :answers %>
+    <%= form.collection_select :answers, Answer.all, :id, :text,{}, { multiple: true } %>
   </div>
 
   <div class="actions">

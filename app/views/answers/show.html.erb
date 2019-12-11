@@ -20,5 +20,9 @@
   <%= @answer.locked %>
 </p>
 
+  <% for question in @answer.question_templates %>
+    <p> <%= question %> </p>
+  <% end %>
+
 <%= link_to 'Edit', edit_answer_path(@answer) %> |
 <%= link_to 'Back', answers_path %>

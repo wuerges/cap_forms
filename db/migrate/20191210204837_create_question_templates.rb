@@ -7,7 +7,7 @@ class CreateQuestionTemplates < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    create_table :question_templates_anwers, id: false do |t|
+    create_table :answers_question_templates, id: false do |t|
       t.belongs_to :question_template
       t.belongs_to :answer
 

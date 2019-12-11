@@ -10,5 +10,14 @@
   <%= @question_template.locked %>
 </p>
 
+<p>
+<strong>Answers:</strong>
+<ol>
+  <% for answer in @question_template.answers %>
+  <li> <%= answer.text %> </li>
+  <% end %>
+</ol>
+</p>
+
 <%= link_to 'Edit', edit_question_template_path(@question_template) %> |
 <%= link_to 'Back', question_templates_path %>

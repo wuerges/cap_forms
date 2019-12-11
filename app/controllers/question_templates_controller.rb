@@ -24,6 +24,7 @@ class QuestionTemplatesController < ApplicationController
   # POST /question_templates
   # POST /question_templates.json
   def create
+
     @question_template = QuestionTemplate.new(question_template_params)
 
     respond_to do |format|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_103018) do
+ActiveRecord::Schema.define(version: 2019_12_11_103140) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -70,6 +70,20 @@ ActiveRecord::Schema.define(version: 2019_12_11_103018) do
     t.integer "major_id", null: false
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer "ccr_id", null: false
+    t.integer "major_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ccr_id"], name: "index_offers_on_ccr_id"
+    t.index ["major_id"], name: "index_offers_on_major_id"
+  end
+
+  create_table "offers_professors", id: false, force: :cascade do |t|
+    t.integer "professor_id", null: false
+    t.integer "offer_id", null: false
+  end
+
   create_table "professors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -102,5 +116,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_103018) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "offers", "ccrs"
+  add_foreign_key "offers", "majors"
   add_foreign_key "questions", "question_templates"
 end

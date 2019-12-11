@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ccr:</strong>
+  <%= @offer.ccr_id %>
+</p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @offer.major_id %>
+</p>
+
+<%= link_to 'Edit', edit_offer_path(@offer) %> |
+<%= link_to 'Back', offers_path %>

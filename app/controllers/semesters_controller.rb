@@ -70,7 +70,7 @@ class SemestersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def semester_params
       res = params.require(:semester).permit(:name, :major_id, offers: [])
-      res[:offers] = Offer.find(res[:offers].reject(&:empty?))
+      res[:offers] = res[:offers] ? Offer.find(res[:offers].reject(&:empty?)) : []
       res
     end
 end

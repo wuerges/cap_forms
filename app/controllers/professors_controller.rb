@@ -69,6 +69,8 @@ class ProfessorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def professor_params
-      params.require(:professor).permit(:name)
+      res = params.require(:professor).permit(:name, majors: [])
+      res[:majors] = Major.find(res[:majors].reject { |v| v == "" })
+      res
     end
 end

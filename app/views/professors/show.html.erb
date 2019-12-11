@@ -5,5 +5,11 @@
   <%= @professor.name %>
 </p>
 
+<p>  <strong>Majors:</strong></p>
+
+  <% for major in @professor.majors %>
+    <p> <%= major %> </p>
+  <% end %>
+
 <%= link_to 'Edit', edit_professor_path(@professor) %> |
 <%= link_to 'Back', professors_path %>

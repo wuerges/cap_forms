@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_031127) do
+ActiveRecord::Schema.define(version: 2019_12_11_094435) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 2019_12_11_031127) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["answer_id"], name: "index_answers_question_templates_on_answer_id"
     t.index ["question_template_id"], name: "index_answers_question_templates_on_question_template_id"
+  end
+
+  create_table "form_templates", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "form_templates_questions", id: false, force: :cascade do |t|
+    t.integer "form_template_id", null: false
+    t.integer "question_id", null: false
+    t.index ["question_id", "form_template_id"], name: "form_template_question_index"
   end
 
   create_table "question_templates", force: :cascade do |t|

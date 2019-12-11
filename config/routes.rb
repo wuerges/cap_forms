@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :form_templates
   resources :questions
   resources :question_templates
   resources :answers

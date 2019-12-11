@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<h2> <%= @report.name %> </h2>
+
+<% for form_appl in @report.form_applications %>
+    <p> <%= form_appl.to_s %> </p>
+<p> <% question_data = form_appl.gather_complete_data(0) %> </p>
+
+<% question_data_prof_offer = form_appl.gather_data(@professor.id, @offer.id, 0) %>
+<% for question_id, data in question_data_prof_offer %>
+
+<h2> <%= Question.find(question_id).text %> </h2>
+
+           <div id="qid<%= question_id %>" style="width:800px;height:600px;"></div>
+            <script>
+                var trace1 = {
+                    y: <%=raw data[0] %>,
+                    x: <%=raw data[1] %>,
+                    text: <%=raw data[2] %>,
+                    type: 'bar',
+                    hoverinfo: 'none',
+                    textposition: 'auto',
+                    name: "CCR",
+                    orientation: 'h'
+                };
+                var trace2 = {
+                    y: <%=raw question_data[question_id][0] %>,
+                    x: <%=raw question_data[question_id][1] %>,
+                    text: <%=raw question_data[question_id][2] %>,
+                    type: 'bar',
+                    hoverinfo: 'none',
+                    textposition: 'auto',
+                    name: "Major",
+                    orientation: 'h'
+                };
+
+                var data = [trace1, trace2];
+                var layout = {
+
+                    barmode: 'group',
+                    xaxis: {range: [0, 1], tickformat: '%'},
+                };
+                Plotly.newPlot('qid<%= question_id %>', data, layout)
+            </script>
+
+<p> x2 = <%= data[0] %> </p>
+<p> y2 = <%= data[1] %> </p>
+<p> z2 = <%= data[2] %> </p>
+
+<p> x1 = <%= question_data[question_id][0] %> </p>
+<p> y1 = <%= question_data[question_id][1] %> </p>
+<p> z1 = <%= question_data[question_id][2] %> </p>
+
+
+<% end %>
+
+<% end %>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>

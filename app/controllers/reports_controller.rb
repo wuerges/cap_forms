@@ -12,6 +12,12 @@ class ReportsController < ApplicationController
   def show
   end
 
+  def individual
+    @report = Report.find(params.require(:id))
+    @professor = Professor.find(params.require(:professor_id))
+    @offer = Offer.find(params.require(:offer_id))
+  end
+
   # GET /reports/new
   def new
     @report = Report.new

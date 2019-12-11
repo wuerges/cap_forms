@@ -22,7 +22,7 @@ class FormApplication < ApplicationRecord
                   .group(["question_id", "answer_id"])
                   .count("answer_id")
 
-    return fix_data(resp)    
+    return fix_data(resp)
   end
 
   def gather_complete_data(question_type)
@@ -39,10 +39,10 @@ class FormApplication < ApplicationRecord
 
   def fix_data(resp)
     q_hash = {}
-    
+
     for k,count in resp
       question_id, answer_id = k
-      
+
       if ! q_hash[question_id]
         q_hash[question_id] = []
       end
@@ -55,12 +55,12 @@ class FormApplication < ApplicationRecord
       answers = Question.find(question_id).question_template.answers
       ids = answers.map(&:id)
       h_count = Hash[v]
-      
+
       labels = answers.map(&:text)
-      counts = ids.map  { |i| h_count[i] ? h_count[i] : 0 } 
-      
+      counts = ids.map  { |i| h_count[i] ? h_count[i] : 0 }
+
       result[question_id] = [labels, counts.map {|v| v.to_f / counts.sum}, counts]
-    end  
+    end
 
     return result
   end

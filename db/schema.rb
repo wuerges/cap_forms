@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_151900) do
   create_table "majors_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "major_id", null: false
+    t.index ["major_id", "user_id"], name: "index_majors_users_on_major_id_and_user_id"
   end
 
   create_table "offers", force: :cascade do |t|

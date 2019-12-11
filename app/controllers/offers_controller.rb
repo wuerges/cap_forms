@@ -70,7 +70,7 @@ class OffersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def offer_params
       res = params.require(:offer).permit(:ccr_id, :major_id, professors: [])
-      res[:professors] = Professor.find(res[:professors].reject(&:empty?))
+      res[:professors] = res[:professors] ? Professor.find(res[:professors].reject(&:empty?)) : []
       res
     end
 end

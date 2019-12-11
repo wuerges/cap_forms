@@ -13,20 +13,20 @@
 
   <div class="field">
     <%= form.label :ccr_id %>
-    <%= form.collection_select :ccr_id, Ccr.all, :id, :name, 
+    <%= form.collection_select :ccr_id, Ccr.all, :id, :name,
       { selected: offer.ccr && offer.ccr.id } %>
   </div>
 
   <div class="field">
     <%= form.label :major_id %>
-    <%= form.collection_select :major_id, Major.all, :id, :name, 
+    <%= form.collection_select :major_id, Major.all, :id, :name,
       { selected: offer.major && offer.major.id } %>
   </div>
 
   <% if offer.major %>
     <div class="field">
       <%= form.label :professors %>
-      <%= form.collection_select :professors, Professor.all, :id, :name, 
+      <%= form.collection_select :professors, offer.major.professors, :id, :name, 
         { selected: offer.professors && offer.professors.map(&:id) }, { multiple: true } %>
     </div>
   <% end %>

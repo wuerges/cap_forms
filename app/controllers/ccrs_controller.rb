@@ -69,6 +69,8 @@ class CcrsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ccr_params
-      params.require(:ccr).permit(:name)
+      ps = params.require(:ccr).permit(:name, majors: [])
+      ps[:majors] = Major.find( ps[:majors].reject(&:empty?) )
+      ps
     end
 end

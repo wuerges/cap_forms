@@ -5,5 +5,10 @@
   <%= @ccr.name %>
 </p>
 
+<p>
+  <strong>Majors:</strong>
+  <%= @ccr.majors.map(&:to_s) %>
+</p>
+
 <%= link_to 'Edit', edit_ccr_path(@ccr) %> |
 <%= link_to 'Back', ccrs_path %>

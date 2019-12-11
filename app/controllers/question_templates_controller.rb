@@ -42,6 +42,7 @@ class QuestionTemplatesController < ApplicationController
   # PATCH/PUT /question_templates/1.json
   def update
     respond_to do |format|
+      
       if @question_template.update(question_template_params)
         format.html { redirect_to @question_template, notice: 'Question template was successfully updated.' }
         format.json { render :show, status: :ok, location: @question_template }
@@ -70,6 +71,8 @@ class QuestionTemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_template_params
-      params.require(:question_template).permit(:name, :locked)
+      res = params.require(:question_template).permit(:name, :locked, answers: [])
+      res[:answers] = Answer.find(res[:answers].reject { |v| v=="" })
+      res
     end
 end

@@ -15,7 +15,8 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
     <%= form.label :answers %>
-    <%= form.collection_select :answers, Answer.all, :id, :text,{}, { multiple: true } %>
+    <% #= form.select :answers, Answer.all.collect { |a| [a.text, a.id] }, { include_blank: false, propmt: false }, { multiple: true } %>
+    <%= form.collection_select :answers, Answer.all, :id, :text,{ selected: question_template.answer_ids }, { multiple: true } %>
   </div>
 
   <div class="actions">

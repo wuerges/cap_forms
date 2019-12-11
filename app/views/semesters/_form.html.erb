@@ -18,8 +18,18 @@
 
   <div class="field">
     <%= form.label :major_id %>
-    <%= form.text_field :major_id %>
+    <%= form.collection_select :major_id, Major.all, :id, :name, 
+      { selected: semester.major && semester.major.id } %>
   </div>
+
+  <% if semester.major %>
+    <div class="field">
+      <%= form.label :offers %>
+      <%= form.collection_select :offers, semester.major.offers, :id, :to_s, 
+        { selected: semester.offers && semester.offers.map(&:id) }, { multiple: true } %>
+    </div>
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit %>

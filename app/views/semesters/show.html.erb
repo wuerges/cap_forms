@@ -7,8 +7,16 @@
 
 <p>
   <strong>Major:</strong>
-  <%= @semester.major_id %>
+  <%= @semester.major.to_s %>
 </p>
+
+<p>  <strong>Offers:</strong> </p>
+
+<ul>
+<% for offer in @semester.offers %>
+  <li> <%= offer.to_s %> </li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_semester_path(@semester) %> |
 <%= link_to 'Back', semesters_path %>

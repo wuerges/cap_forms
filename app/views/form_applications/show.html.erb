@@ -10,5 +10,14 @@
   <%= @form_application.form_template.name %>
 </p>
 
+
+<ol>
+<% for offer in @form_application.semester.offers %>
+  <% for professor in offer.professors %>
+    <li><%= link_to "#{offer.to_s} - #{professor.name}", submit_form_path(id: @form_application.id, professor_id: professor.id, offer_id: offer.id) %></li>
+  <% end %>
+<% end %>
+</ol>
+
 <%= link_to 'Edit', edit_form_application_path(@form_application) %> |
 <%= link_to 'Back', form_applications_path %>

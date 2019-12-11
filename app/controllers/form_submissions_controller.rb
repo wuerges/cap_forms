@@ -17,6 +17,12 @@ class FormSubmissionsController < ApplicationController
     @form_submission = FormSubmission.new
   end
 
+  def submit_form
+    @form_application = FormApplication.find(params[:id])
+    @professor = Professor.find(params[:professor_id])
+    @offer = Offer.find(params[:offer_id])
+  end
+
   # GET /form_submissions/1/edit
   def edit
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_100532) do
+ActiveRecord::Schema.define(version: 2019_12_11_100721) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(version: 2019_12_11_100532) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "majors_professors", id: false, force: :cascade do |t|
+    t.integer "major_id", null: false
+    t.integer "professor_id", null: false
+    t.index ["professor_id", "major_id"], name: "index_majors_professors_on_professor_id_and_major_id"
+  end
+
+  create_table "majors_users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "major_id", null: false
   end
 
   create_table "professors", force: :cascade do |t|

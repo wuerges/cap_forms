@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_11_151900) do
+ActiveRecord::Schema.define(version: 2019_12_15_223208) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "answer_type"
@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 2019_12_11_151900) do
   create_table "majors_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "major_id", null: false
-    t.index ["major_id", "user_id"], name: "index_majors_users_on_major_id_and_user_id"
   end
 
   create_table "offers", force: :cascade do |t|
@@ -163,6 +162,7 @@ ActiveRecord::Schema.define(version: 2019_12_11_151900) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "role"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

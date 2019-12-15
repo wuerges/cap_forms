@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :majors %>
-    <%= form.collection_select :majors, Major.all, :id, :name, { selected: professor.major_ids }, { multiple: true } %>
+    <%= form.collection_select :majors, Major.all, :id, :name, { selected: professor.major_ids }, { multiple: true, size: 20 } %>
   </div>
 
   <div class="actions">

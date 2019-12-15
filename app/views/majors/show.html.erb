@@ -6,10 +6,11 @@
 </p>
 
 <p>
-  <strong>Majors:</strong>
+  <strong>CCRs:</strong>
   <%= @major.ccrs.map(&:to_s) %>
 </p>
 
 
+<%= link_to 'New Major', new_major_path %>
 <%= link_to 'Edit', edit_major_path(@major) %> |
 <%= link_to 'Back', majors_path %>

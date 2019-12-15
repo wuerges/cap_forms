@@ -8,5 +8,6 @@
 <p>  <strong>Majors:</strong> <%= @professor.majors.map(&:to_s) %> </p>
 
 
+<%= link_to 'New Professor', new_professor_path %>
 <%= link_to 'Edit', edit_professor_path(@professor) %> |
 <%= link_to 'Back', professors_path %>

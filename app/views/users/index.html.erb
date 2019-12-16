@@ -18,9 +18,10 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= form_with(model: user, remote: true) do |form| %>
-          <%= form.select :role, User.role_types.keys.map { |w| [w.humanize, w] }, 
-            {}, onChange: "console.log('trying to submit form'); Rails.fire(this.form, 'submit')".html_safe %>
+        <td><%= form_for(user, {remote: true, format: :js}) do |form| %>
+          <%= token_tag %> 
+          <%= form.select :role, User.roles.keys.map { |w| [w.humanize, w] }, 
+            {}, onChange: "console.log('trying to submit form'); this.form.submit();".html_safe %>
         <% end %></td>
 
         <td><%= link_to 'Show', user %></td>
